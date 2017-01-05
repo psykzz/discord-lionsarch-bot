@@ -1,3 +1,6 @@
+var express = require('express')
+var app = express()
+
 var Bot = require('./lib/bot')
 
 bot = new Bot()
@@ -21,3 +24,12 @@ bot.addCommand("!fractals", (args, callback) => {
     })
 })
 
+// Create a redirect to install the bot.
+app.set('port', (process.env.PORT || 5000))
+app.get('/', function(req, res) {
+    res.redirect('https://discordapp.com/oauth2/authorize?client_id=266603466988716032&scope=bot&permissions=0')
+})
+
+app.listen(app.get('port'), function() {
+  console.log("Running:" + app.get('port'))
+})
